@@ -58,13 +58,13 @@ Experimental details are given in the paper, but here's an overview of how it pe
 
 ### Accuracy
 
-![Accuracy Results](figs/paper/acc.pdf?raw=true "Accuracy Results")
+![Accuracy Results](/figs/paper/acc.pdf?raw=true "Accuracy Results")
 
 Higher lines are better. This says that when you compare the places in the data that the algorithms thought were instances of the pattern with those that actually were, ours is right much more often. The x axis is how stringent a cutoff we have for being "right" (defined in terms of how much a predicted instance has to overlap in time with a true instance). The y axis is the [F1 Score](https://en.wikipedia.org/wiki/F1_score), a measure of how well it retrieves (only) the true instances.
 
 ### Scalability
 
-![Scalability Results](figs/paper/scalability.pdf?raw=true "Scalability Results")
+![Scalability Results](/figs/paper/scalability/scalability.pdf?raw=true "Scalability Results")
 
 Lower lines are better. This says that when you increase the length of the time series, the estimated length of the pattern, or the range of possible lengths of the pattern (since you don't have to know it exactly), our algorithm doesn't get much slower. Further, it's virtually always 10x-100x faster than alternatives.
 
