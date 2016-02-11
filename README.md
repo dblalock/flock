@@ -25,7 +25,7 @@ If you want to use our algorithm, just use the code in `standalone/`. It's <300 
 ```
 $ python -m <repoDirectory>/standalone/main.py
 ```
-Further, if you're trying to find patterns in a particular domain, you can likely get better performance using customized features. The current implementation only uses shape features since these are fairly generic, but any sparse features valued in [0, 1] will work. For example, quantizing and one-hot encoding the raw time series often works well if there's no wandering baseline or amplitude variability.
+Further, if you're trying to find patterns in a particular domain, you can likely get better performance using customized features. The current implementation only uses shape features since these are fairly generic, but any sparse features valued in [0, 1] will work. For example, quantizing and one-hot encoding the raw time series usually works well if there's no wandering baseline or amplitude variability.
 
 If you want to use our datasets, look in `python/datasets/`. There are files to read in each dataset (as well as some others not used in the paper), and a top-level wrapper function `loadDataset()` in datasets.py. Note that you will have to download the raw datasets yourself and edit `paths.py` to point to the proper locations on your machine.
 
@@ -37,18 +37,18 @@ If you want to dig into the details of our experiments, look in the `python` sub
 None besides the Scipy stack, although main.py uses the datasets
 
 ### Datasets:
-[Librosa](https://github.com/bmcfee/librosa) - for extracting MFCCs for the TIDIGITS dataset
-[Joblib](https://github.com/joblib/joblib) - for caching function output
-[FFmpeg](http://www.ffmpeg.org) - optional, for animating the subsequences in a dataset
-[AMPDs](http://ampds.org) - the dishwasher dataset
-[TIDIGITS](https://catalog.ldc.upenn.edu/LDC93S10) - the TIDIGITS dataset
-[MSRC-12](http://research.microsoft.com/en-us/um/cambridge/projects/msrc12/) - the MSRC-12 Kinect dataset
-[UCR Archive](http://www.cs.ucr.edu/~eamonn/time_series_data/) - the UCR time series archive
+- [Librosa](https://github.com/bmcfee/librosa) - for extracting MFCCs for the TIDIGITS dataset
+- [Joblib](https://github.com/joblib/joblib) - for caching function output
+- [FFmpeg](http://www.ffmpeg.org) - optional, for animating the subsequences in a dataset
+- [AMPDs](http://ampds.org) - the dishwasher dataset
+- [TIDIGITS](https://catalog.ldc.upenn.edu/LDC93S10) - the TIDIGITS dataset
+- [MSRC-12](http://research.microsoft.com/en-us/um/cambridge/projects/msrc12/) - the MSRC-12 Kinect dataset
+- [UCR Archive](http://www.cs.ucr.edu/~eamonn/time_series_data/) - the UCR time series archive
 
 ### Full codebase (i.e., if running the experiments):
-[Numba](https://github.com/numba/numba) - used to speed up comparison algorithms
-[Scikit-learn](https://github.com/scikit-learn/scikit-learn) - for building pipelines
-[Seaborn](https://github.com/mwaskom/seaborn) - for creating certain figures
+- [Numba](https://github.com/numba/numba) - used to speed up comparison algorithms
+- [Scikit-learn](https://github.com/scikit-learn/scikit-learn) - for building pipelines
+- [Seaborn](https://github.com/mwaskom/seaborn) - for creating certain figures
 
 ## Does it work?
 
@@ -58,13 +58,17 @@ Experimental details are given in the paper, but here's an overview of how it pe
 
 ### Accuracy
 
-![Accuracy Results](figs/paper/acc.pdf?raw=true "Accuracy Results")
+![AccuracyResults](/figs/web/accuracy.jpg?raw=true)
 
 Higher lines are better. This says that when you compare the places in the data that the algorithms thought were instances of the pattern with those that actually were, ours is right much more often. The x axis is how stringent a cutoff we have for being "right" (defined in terms of how much a predicted instance has to overlap in time with a true instance). The y axis is the [F1 Score](https://en.wikipedia.org/wiki/F1_score), a measure of how well it retrieves (only) the true instances.
 
 ### Scalability
 
-![Scalability Results](figs/paper/scalability.pdf?raw=true "Scalability Results")
+![ScalabilityResults](/figs/web/scalability.jpg?raw=true)
 
 Lower lines are better. This says that when you increase the length of the time series, the estimated length of the pattern, or the range of possible lengths of the pattern (since you don't have to know it exactly), our algorithm doesn't get much slower. Further, it's virtually always 10x-100x faster than alternatives.
+
+## Theoretical Basis
+
+Under certain independence assumptions, Feature Flocks are [maximum *a posteriori*](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation) estimates of the patterns in the data. For the mathematically-inclined, [here's the derivation](/figs/web/flock-derivation.pdf?raw=true).
 
