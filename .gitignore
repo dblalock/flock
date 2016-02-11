@@ -67,6 +67,8 @@ communicate/.ipynb_checkpoints/
 figs/*
 
 # except a few things
+!figs/web
+!figs/web/*
 !figs/official
 !figs/official/*
 !figs/official/*/*
