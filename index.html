@@ -15,10 +15,9 @@
 
   </head>
   <body>
-
       <header>
-        <h1>Flock</h1>
-        <p>Supporting website for Feature Flocks</p>
+        <h1>Feature Flocks</h1>
+        <p>Accurate Pattern Discovery in Multivariate Signals</p>
       </header>
 
       <div id="banner">
@@ -39,7 +38,64 @@
         <ul></ul>
       </nav>
       <section>
-        <h3>
+
+<h2>What problem does this solve?</h2>
+
+  <h4>Short Version</h4>
+  <p>
+  We take in a multivariate time series containing some unknown pattern and return both a model of the pattern and all the places it happens.
+  </p>
+
+  <h4>Long Version</h4>
+  <p>
+  We take in a multivariate time series containing some unknown pattern and return both Thanks to the rise of wearable and connected devices, sensor-generated time series comprise a large and growing fraction of the world's data. Unfortunately, extracting value from this data can be challenging, since sensors can only report low-level signals (e.g., acceleration), not the high-level phenomena that are typically of interest (e.g., gestures).
+
+  Spotting such high-level phenomena using low-level signals is currently problematic. Given enough labeled examples of the phenomena taking place, one could, in principle, train a classifer for this purpose. However, obtaining labeled examples is extremely difficult. Unlike text or images, time series cannot be culled at scale from the web, and even if they could be, they are difficult or impossible for humans to inspect and label. The alternative is to record examples yourself, but as those of us who've spent time doing this know, it "require[s] huge effort from human annotators or experts."[<a href="http://users.ece.cmu.edu/~hengtzec/papers/MobiSys13_NuActiv_Cheng_CMU.pdf">1</a>]. Perhaps worst of all, both of these approaches require one to know all the phenomena that exist to be labeled, which may not be the case.
+  </p><p>
+  What is needed, then, is an automated means of discovering and labeling patterns within time series, and this is what our algorithm does.a model of the pattern and all the places it happens.
+  </p>
+
+<h2>How does it do this?</h2>
+<p>
+The basic idea is to represent the time series in terms of what features are present over time. Example features include levels of variance, slope, or resemblence to learned [shapelets](http://alumni.cs.ucr.edu/~lexiangy/Shapelet/kdd2009shapelet.pdf). Using this representation, a pattern consists of certain features occurring together in time more often than would be expected by chance. We term this set of features a "flock" and have a fast algorithm for finding it.
+</p><p>
+See <a href="resources/blalock-guttag-flock.pdf?raw=true">the paper</a> for more information.
+</p>
+
+<h2>How do I use this algorithm?</h2>
+<p>
+See our <a href="https://github.com/dblalock/flock">Github Page</a>. There's a simple Python implementation and instructions for using it.
+
+<h2>Does it work?</h2>
+<p>
+Yes. It's not quite as smart as a human staring at only the relevant signals, but it's quite good for an unsupervised algorithm---it routinely has >90\% precision and recall in finding patterns. It's also *much* more accurate (and much faster) than alternative algorithms.
+</p><p>
+Experimental details are given in the paper, but here's an overview of how it performed in terms of accuracy and speed.
+</p>
+
+<h4>Accuracy</h4>
+<img src="resources/accuracy.jpg" alt="flock-accuracy"/>
+<p>
+Higher lines are better. This says that when you compare the places in the data that the algorithms thought were instances of the pattern with those that actually were, ours is right much more often. The x axis is how stringent a cutoff we have for being "right" (defined in terms of how much a predicted instance has to overlap in time with a true instance). The y axis is the <a href="https://en.wikipedia.org/wiki/F1_score">F1 Score</a>, a measure of how well it retrieves (only) the true instances.
+</p><p>
+At a threshold of .5, which corresponds to returning most of the pattern but not getting it perfect, we have >90% precision and recall on the three real-world datasets. It's a bit lower on the synthetic UCR dataset.
+</p>
+
+
+<h4>Scalability</h4>
+<img src="resources/scalability.jpg" alt="flock-scalability"/>
+<p>
+Lower lines are better. This says that when you increase the length of the time series, the estimated length of the pattern, or the range of possible lengths of the pattern (since you don't have to know it exactly), our algorithm doesn't get much slower. Further, it's virtually always 10x-100x faster than alternatives. In absolute terms, it can mine a length 1000 time series in a few seconds, despite being written in simple Python.
+</p>
+
+
+<h4>Theoretical Basis</h4>
+<p>
+Under certain independence assumptions, Feature Flocks are <a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation">maximum <em>a posteriori</em></a> estimates of the patterns in the data. For the mathematically-inclined, <a href="resources/flock-derivation.pdf">here's the derivation</a>.
+</p>
+
+<!--
+<h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
 <p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
@@ -59,10 +115,12 @@
 
 <p>You can <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/#mentioning-users-and-teams" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
+
 <h3>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
 
 <p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+-->
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/dblalock">dblalock</a></p>
