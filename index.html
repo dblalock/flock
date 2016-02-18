@@ -74,7 +74,7 @@ Experimental details are given in the paper, but here's an overview of how it pe
 </p>
 
 <h4>Accuracy</h4>
-<img src="resources/accuracy.jpg" alt="flock-accuracy"/>
+<img src="/resources/accuracy.jpg" alt="flock-accuracy"/>
 <p>
 Higher lines are better. This says that when you compare the places in the data that the algorithms thought were instances of the pattern with those that actually were, ours is right much more often. The x axis is how stringent a cutoff we have for being "right" (defined in terms of how much a predicted instance has to overlap in time with a true instance). The y axis is the <a href="https://en.wikipedia.org/wiki/F1_score">F1 Score</a>, a measure of how well it retrieves (only) the true instances.
 </p><p>
@@ -83,7 +83,7 @@ At a threshold of .5, which corresponds to returning most of the pattern but not
 
 
 <h4>Scalability</h4>
-<img src="resources/scalability.jpg" alt="flock-scalability"/>
+<img src="/resources/scalability.jpg" alt="flock-scalability"/>
 <p>
 Lower lines are better. This says that when you increase the length of the time series, the estimated length of the pattern, or the range of possible lengths of the pattern (since you don't have to know it exactly), our algorithm doesn't get much slower. Further, it's virtually always 10x-100x faster than alternatives. In absolute terms, it can mine a length 1000 time series in a few seconds, despite being written in simple Python.
 </p>
@@ -91,7 +91,7 @@ Lower lines are better. This says that when you increase the length of the time 
 
 <h4>Theoretical Basis</h4>
 <p>
-Under certain independence assumptions, Feature Flocks are <a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation">maximum <em>a posteriori</em></a> estimates of the patterns in the data. For the mathematically-inclined, <a href="resources/flock-derivation.pdf">here's the derivation</a>.
+Under certain independence assumptions, Feature Flocks are <a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation">maximum <em>a posteriori</em></a> estimates of the patterns in the data. For the mathematically-inclined, <a href="/resources/flock-derivation.pdf">here's the derivation</a>.
 </p>
 
 <!--
