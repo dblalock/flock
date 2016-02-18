@@ -58,17 +58,17 @@ Experimental details are given in the paper, but here's an overview of how it pe
 
 ### Accuracy
 
-![AccuracyResults](/figs/web/accuracy.jpg?raw=true)
+![AccuracyResults](/resources/accuracy.jpg?raw=true)
 
 Higher lines are better. This says that when you compare the places in the data that the algorithms thought were instances of the pattern with those that actually were, ours is right much more often. The x axis is how stringent a cutoff we have for being "right" (defined in terms of how much a predicted instance has to overlap in time with a true instance). The y axis is the [F1 Score](https://en.wikipedia.org/wiki/F1_score), a measure of how well it retrieves (only) the true instances.
 
 ### Scalability
 
-![ScalabilityResults](/figs/web/scalability.jpg?raw=true)
+![ScalabilityResults](/resources/scalability.jpg?raw=true)
 
 Lower lines are better. This says that when you increase the length of the time series, the estimated length of the pattern, or the range of possible lengths of the pattern (since you don't have to know it exactly), our algorithm doesn't get much slower. Further, it's virtually always 10x-100x faster than alternatives.
 
 ## Theoretical Basis
 
-Under certain independence assumptions, Feature Flocks are [maximum *a posteriori*](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation) estimates of the patterns in the data. For the mathematically-inclined, [here's the derivation](/figs/web/flock-derivation.pdf?raw=true).
+Under certain independence assumptions, Feature Flocks are [maximum *a posteriori*](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation) estimates of the patterns in the data. For the mathematically-inclined, [here's the derivation](/resources/flock-derivation.pdf?raw=true).
 
