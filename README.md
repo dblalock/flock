@@ -40,6 +40,7 @@ None besides the Scipy stack, although main.py uses the datasets
 - [Librosa](https://github.com/bmcfee/librosa) - for extracting MFCCs for the TIDIGITS dataset
 - [Joblib](https://github.com/joblib/joblib) - for caching function output
 - [FFmpeg](http://www.ffmpeg.org) - optional, for animating the subsequences in a dataset
+- [Scikit-learn](https://github.com/scikit-learn/scikit-learn) - `datasets/datasets.py` includes a class for sklearn integration.
 - [AMPDs](http://ampds.org) - the dishwasher dataset
 - [TIDIGITS](https://catalog.ldc.upenn.edu/LDC93S10) - the TIDIGITS dataset
 - [MSRC-12](http://research.microsoft.com/en-us/um/cambridge/projects/msrc12/) - the MSRC-12 Kinect dataset
@@ -47,7 +48,6 @@ None besides the Scipy stack, although main.py uses the datasets
 
 ### Full codebase (i.e., if running the experiments):
 - [Numba](https://github.com/numba/numba) - used to speed up comparison algorithms
-- [Scikit-learn](https://github.com/scikit-learn/scikit-learn) - for building pipelines
 - [Seaborn](https://github.com/mwaskom/seaborn) - for creating certain figures
 
 ## Does it work?
